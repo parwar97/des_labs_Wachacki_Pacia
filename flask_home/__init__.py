@@ -4,6 +4,35 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 import RPi.GPIO as GPIO
+import flask_home.extensions.dht11 as dht11
+import threading
+
+GPIO.setmode(GPIO.BCM)
+
+
+temp, humi = 0, 0
+
+class TempThread(threading.Thread):
+    def __init__(self, pin_GPIO):
+        threading.Thread.__init__(self)
+        self.pin = pin_GPIO
+    def run(self):
+        dht = dht11.DHT11(pin = self.pin)
+        #temp, humi = 0, 0
+        global temp
+        global humi
+        while True:
+            result = dht.read()
+            if result.is_valid():
+                temp = result.temperature
+                humi = result.humidity
+                #import sys
+                #print(temp, file=sys.stderr)
+            else:
+                temp = 111
+
+TempThread(14).start()
+
 
 
 app = Flask(__name__)
@@ -21,13 +50,16 @@ mail = Mail()
 GPIO.setmode(GPIO.BCM)
 
 devices = {
-    'lamp':{'id':1, 'pin':26, 'state':GPIO.LOW},
-    'electricity':{'id':2, 'pin':19, 'state':GPIO.LOW},
-    'door':{'id':3, 'pin':23, 'state':GPIO.LOW},
+    'lamp':{'id':1, 'pin':26, 'state':GPIO.HIGH},
+    'electricity':{'id':2, 'pin':19, 'state':GPIO.HIGH},
+    'door':{'id':3, 'pin':23, 'state':GPIO.HIGH},
 }
 
 for device, state in devices.items():
     GPIO.setup(state['pin'], GPIO.OUT)
+
+#dht = dht11.DHT11(pin = 14)
+
 
 
 

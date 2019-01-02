@@ -1,4 +1,4 @@
-from flask_home import app, db, bcrypt, mail, devices
+from flask_home import app, db, bcrypt, mail, devices, temp, humi
 from flask import render_template, flash, redirect, url_for, request
 from flask_home.models import User
 from flask_home.forms import (
@@ -10,6 +10,7 @@ from flask_home.forms import (
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 import RPi.GPIO as GPIO
+#import flask_home.extensions.dht11 as dht11
 
 
 # Strona rejestracji nowego uzytkownika.
@@ -116,7 +117,18 @@ def account():
 
 @app.route('/home')
 def home():
-    return render_template("home.html", devices=devices)
+    '''dht = dht11.DHT11(pin = 14)
+    result = dht.read()
+    import sys
+    if result.is_valid():
+        print("Temperature: %d C" % result.temperature,  file=sys.stderr)
+        print("Humidity: %d %%" % result.humidity,  file=sys.stderr)
+    else:
+        print("Error: %d" % result.error_code,  file=sys.stderr)
+    temp = result.temperature
+    humi = result.humidity'''
+    info = {'temp': temp, 'humi':humi}
+    return render_template("home.html", devices=devices, info=info)
 
 
 @app.route('/device/<name>/<state>')
