@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+{% include "includes/navbar.html" %}
+<div class="main-container container-fluid mt-4 mb-2">
+  {% include "includes/flash_messages.html" %}
+  <form class="form-border" action="" method="POST">
+    {{ form.csrf_token() }}
+    <fieldset>
+      <legend class="text-center"><h3 class="text-light">New Smart Home User</h3></legend>
+      <div class="form-group">
+        {{ form.username.label(class="form-control-label text-light") }}:
+        {% if form.username.errors %}
+          {{ form.username(class="form-control is-invalid", placeholder="Username") }}
+          <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.username(class="form-control", placeholder="Username") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.email.label(class="form-control-label text-light") }}:
+        {% if form.email.errors %}
+          {{ form.email(class="form-control is-invalid", placeholder="Enter Email") }}
+          <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.email(class="form-control", placeholder="Enter Email") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.password.label(class="form-control-label text-light") }}:
+        {% if form.password.errors %}
+          {{ form.password(class="form-control is-invalid", placeholder="Password") }}
+          <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.password(class="form-control", placeholder="Password") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.confirm_password.label(class="form-control-label text-light") }}:
+        {% if form.confirm_password.errors %}
+          {{ form.confirm_password(class="form-control is-invalid", placeholder="Repeat Password") }}
+          <div class="invalid-feedback">
+            {% for error in form.confirm_password.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.confirm_password(class="form-control", placeholder="Repeat Password") }}
+        {% endif %}
+      </div>
+    <fieldset>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-light") }}
+    </div>
+  </form>
+</div>
+{% endblock %}
+

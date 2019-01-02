@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+  {% include 'includes/navbar.html' %}
+  <div class="main-container container-fluid mt-4 mb-2">
+    {% include 'includes/flash_messages.html' %}
+    <form class="form-border" method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+        <legend class="text-center"><h3 class="text-light">Update your personal data</h3></legend>
+        <div class="form-group">
+          {{ form.username.label(class="form-control-label text-light") }}:
+          {% if form.username.errors %}
+            {{ form.username(class="form-control is-invalid", placeholder="Enter Your Username") }}
+            <div class="invalid-feedback">
+              {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.username(class="form-control") }}
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.email.label(class="form-control-label text-light") }}:
+          {% if form.email.errors %}
+            {{ form.email(class="form-control is-invalid", placeholder="Enter Email") }}
+            <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.email(class="form-control") }}
+          {% endif %}
+        </div>
+      </fieldset>
+      <div class="form-group">
+        {{ form.submit(class="btn btn-outline-light") }}
+      </div>
+      <small>
+         <a  href="{{ url_for('reset_password') }}">Change password?</a>
+      </small>
+    </form>
+  </div>
+{% endblock %}
+
