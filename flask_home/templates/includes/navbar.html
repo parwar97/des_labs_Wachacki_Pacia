@@ -1,38 +1,38 @@
- <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
-                {% if request.path == '/' or request.path == '/home' %}
-                    <li class="nav-item active">
-                {% else %}
-                    <li class="nav-item">
-                {% endif %}
-                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                </li>
-                {% if request.path == '/register' %}
-                    <li class="nav-item active">
-                {% else %}
-                    <li class="nav-item">
-                {% endif %}
-                    <a class="nav-link" href="{{ url_for('register') }}">New User</a>
-                </li>
-                {% if request.path == '/account' %}
-                    <li class="nav-item active">
-                {% else %}
-                    <li class="nav-item">
-                {% endif %}
-                    <a class="nav-link" href="{{ url_for('account') }}">My Account</a>
-                </li>
-                {% if request.path == '/logout' %}
-                    <li class="nav-item active">
-                {% else %}
-                    <li class="nav-item">
-                {% endif %}
-                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <ul class="navbar-nav">
+    {% if request.path == '/' or request.path == '/home' %}
+      <li class="nav-item active">
+    {% else %}
+      <li class="nav-item">
+    {% endif %}
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+      </li>
+    {% if request.path == '/register' %}
+      <li class="nav-item active">
+    {% else %}
+      <li class="nav-item">
+    {% endif %}
+        <a class="nav-link" href="{{ url_for('register') }}">New User</a>
+      </li>
+    {% if request.path == '/account' %}
+      <li class="nav-item active">
+    {% else %}
+      <li class="nav-item">
+    {% endif %}
+        <a class="nav-link" href="{{ url_for('account') }}">My Account</a>
+      </li>
+    {% if request.path == '/logout' %}
+      <li class="nav-item active">
+    {% else %}
+      <li class="nav-item">
+    {% endif %}
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 

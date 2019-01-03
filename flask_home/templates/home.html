@@ -1,113 +1,117 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-    {% include "includes/navbar.html" %}
-    <div class="main-container container-fluid"> 
-        {% include "includes/flash_messages.html" %}
+  {% include "includes/navbar.html" %}
+  <div class="main-container container-fluid"> 
+    {% include "includes/flash_messages.html" %}
 
-        <div class="row justify-content-center mt-3 mb-4">
-            <div class="col-md-auto">
-                <h3 class="text-light">Manage Your Devices</h3>
-            </div>
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="col-sm-12 col-md-5 col-lg-5 text-center" id="lamp">
-		{% if devices['lamp']['state'] == False %}
-                <a class="device-item" href="{{ url_for('control', name='lamp', state='off') }}">
-                    <div>
-                        <i class="fas fa-lightbulb" style="color: yellow; font-size: 96px;"></i>
-                {% elif devices['lamp']['state'] == True %}
-                <a class="device-item" href="{{ url_for('control', name='lamp', state='on') }}">
-                    <div>
-                        <i class="fas fa-lightbulb" style="color: white; font-size: 96px;"></i>
-                {% endif %}
-                    </div>
-                    <div>
-                        <p class="lead text-light my-2"> Light in home is</p>
-                    </div>
-                    <div class="state-item">
-                    {% if devices['lamp']['state'] == True %}
-                        <p class="mb-0">OFF</p>
-                    {% elif devices['lamp']['state'] == False %}
-                        <p class="mb-0">ON</p>
-                    {% endif %}
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-12 col-md-5 col-lg-5 text-center" id="electricity">
-                {% if devices['electricity']['state'] == False %}
-                <a class="device-item" href="{{ url_for('control', name='electricity', state='off') }}">
-                    <div>
-                        <i class="fas fa-plug" style="color: rgb(230, 0, 0); font-size: 96px;"></i>
-                {% elif devices['electricity']['state'] == True %}
-                <a class="device-item" href="{{ url_for('control', name='electricity', state='on') }}">
-                    <div>
-                        <i class="fas fa-plug"  style="color: rgb(255,255,255); font-size: 96px;"></i>
-                {% endif %}
-                    </div>
-                    <div>
-                        <p class="lead text-light my-2"> Electricity in home is</p>
-                    </div>
-                    <div class="state-item">
-                    {% if devices['electricity']['state'] == False %}
-                        <p class="mb-0">ON</p>
-                    {% elif devices['electricity']['state'] == True %}
-                        <p class="mb-0">OFF</p>
-                    {% endif %}
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row justify-content-md-center mt-4">
-            <div class="col-sm-12 col-md-5 col-lg-5 text-center" id="door">
-                {% if devices['door']['state'] == False %}
-                <a class="device-item" href="{{ url_for('control', name='door', state='off') }}">
-                    <div>
-                        <i class="fas fa-lock" style="color: rgb(0, 153, 255); font-size: 96px;"></i>
-                {% elif devices['door']['state'] == True %}
-                <a class="device-item" href="{{ url_for('control', name='door', state='on') }}">
-                    <div>
-                        <i class="fas fa-lock-open ml-4" style="color: rgb(255,255,255); font-size: 96px;"></i>
-                {% endif %}
-                    </div>
-                    <div>
-                        <p class="lead text-light my-2">Door are</p>
-                    </div>
-                    <div class="state-item">
-                    {% if devices['door']['state'] == True %}
-                        <p class="mb-0">OPEN</p>
-                    {% elif devices['door']['state'] == False %}
-                        <p class="mb-0">LOCK</p>
-                    {% endif %}
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-12 col-md-5 col-lg-5 text-center" id="">
-                {% if devices['electricity']['state'] == False %}
-                <a class="device-item" href="{{ url_for('control', name='electricity', state='off') }}">
-                    <div>
-                        <i class="fas fa-plug" style="color: rgb(230, 0, 0); font-size: 96px;"></i>
-                {% elif devices['electricity']['state'] == True %}
-                <a class="device-item" href="{{ url_for('control', name='electricity', state='on') }}">
-                    <div>
-                        <i class="fas fa-plug"  style="color: rgb(255,255,255); font-size: 96px;"></i>
-                {% endif %}
-                    </div>
-                    <div>
-                        <p class="lead text-light my-2"> Electricity in home is</p>
-                    </div>
-                    <div class="state-item">
-                    {% if devices['electricity']['state'] == False %}
-                        <p class="mb-0">ON</p>
-                    {% elif devices['electricity']['state'] == True %}
-                        <p class="mb-0">OFF</p>
-                    {% endif %}
-                    </div>
-                </a>
-            </div>
-        </div>
-        <p class="text-light">{{ info['temp'] }} i {{ info['humi'] }}</p>
+    <div class="row justify-content-center mt-3 mb-4">
+      <div class="col-md-auto">
+        <h3 class="text-light">Manage Your Devices</h3>
+      </div>
     </div>
 
+    <div class="row justify-content-md-center">
+      <div class="col-sm-12 col-md-5 col-lg-5 mb-4 text-center" id="lamp">
+        {% if devices['lamp']['state'] == False %}
+          <a class="device-item" href="{{ url_for('control', name='lamp', state='off') }}">
+            <div>
+              <i class="fas fa-lightbulb" style="color: yellow; font-size: 96px;"></i>
+        {% elif devices['lamp']['state'] == True %}
+          <a class="device-item" href="{{ url_for('control', name='lamp', state='on') }}">
+            <div>
+              <i class="fas fa-lightbulb" style="color: white; font-size: 96px;"></i>
+        {% endif %}
+            </div>
+            <div>
+              <p class="lead text-light my-2"> Light in home is</p>
+            </div>
+            <div class="state-item">
+              {% if devices['lamp']['state'] == True %}
+                <p class="mb-0">OFF</p>
+              {% elif devices['lamp']['state'] == False %}
+                <p class="mb-0">ON</p>
+              {% endif %}
+            </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md-5 col-lg-5 mb-4 text-center" id="electricity">
+        {% if devices['electricity']['state'] == False %}
+          <a class="device-item" href="{{ url_for('control', name='electricity', state='off') }}">
+            <div>
+              <i class="fas fa-plug" style="color: rgb(230, 0, 0); font-size: 96px;"></i>
+        {% elif devices['electricity']['state'] == True %}
+          <a class="device-item" href="{{ url_for('control', name='electricity', state='on') }}">
+            <div>
+              <i class="fas fa-plug"  style="color: rgb(255,255,255); font-size: 96px;"></i>
+        {% endif %}
+            </div>
+            <div>
+              <p class="lead text-light my-2"> Electricity in home is</p>
+            </div>
+            <div class="state-item">
+              {% if devices['electricity']['state'] == False %}
+                <p class="mb-0">ON</p>
+              {% elif devices['electricity']['state'] == True %}
+                <p class="mb-0">OFF</p>
+              {% endif %}
+            </div>
+          </a>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-sm-12 col-md-5 col-lg-5 mb-4 text-center" id="door">
+        {% if devices['door']['state'] == False %}
+          <a class="device-item" href="{{ url_for('control', name='door', state='off') }}">
+             <div>
+               <i class="fas fa-lock" style="color: rgb(102, 153, 153); font-size: 96px;"></i>
+        {% elif devices['door']['state'] == True %}
+          <a class="device-item" href="{{ url_for('control', name='door', state='on') }}">
+            <div>
+              <i class="fas fa-lock-open ml-4" style="color: rgb(255,255,255); font-size: 96px;"></i>
+        {% endif %}
+            </div>
+            <div>
+              <p class="lead text-light my-2">Door are</p>
+            </div>
+            <div class="state-item">
+              {% if devices['door']['state'] == True %}
+                <p class="mb-0">OPEN</p>
+              {% elif devices['door']['state'] == False %}
+                <p class="mb-0">LOCK</p>
+              {% endif %}
+            </div>
+          </a>
+      </div>
+      <div class="col-sm-12 col-md-5 col-lg-5 mb-4 text-center" id="">
+        {% if devices['heater']['state'] == False %}
+          <a class="device-item" href="{{ url_for('control', name='heater', state='off') }}">
+            <div>
+              <i class="fab fa-hotjar" style="color: rgb(255, 128, 0); font-size: 96px;"></i>
+        {% elif devices['heater']['state'] == True %}
+          <a class="device-item" href="{{ url_for('control', name='heater', state='on') }}">
+            <div>
+              <i class="fab fa-hotjar" style="color: rgb(255,255,255); font-size: 96px;"></i>
+        {% endif %}
+            </div>
+            <div>
+              <p class="lead text-light my-2"> Heater is</p>
+            </div>
+            <div class="state-item">
+              {% if devices['heater']['state'] == False %}
+                <p class="mb-0">ON</p>
+              {% elif devices['heater']['state'] == True %}
+                <p class="mb-0">OFF</p>
+              {% endif %}
+            </div>
+          </a>
+      </div>
+    </div>
+    <div class="row justify-content-md-center mx-1">
+      <div class="col-sm-12 col-md-10 col-lg-10 info-item text-center pt-3 pb-1">
+        <p class="lead text-light" ><i class="fas fa-thermometer-three-quarters" style="color: rgb(255, 0, 0); font-size: 32px;"></i>   Temperature: {{ info['temp'] }} &#176;C </p>
+        <p class="lead text-light" ><i class="fas fa-tint" style="color: rgb(0, 153, 255); font-size: 32px;"></i>   Humidity: {{ info['humi'] }} %</p>
+      </div>
+    </div>
+  </div>    
 {% endblock %}
